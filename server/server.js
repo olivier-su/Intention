@@ -2,7 +2,6 @@
 
 const express = require("express");
 const morgan = require("morgan");
-const { getFood } = require("./routes/food/foodHandlers");
 
 const PORT = 4000;
 
@@ -19,15 +18,14 @@ app.use(function (req, res, next) {
   );
   next();
 });
-
 app.use(morgan("tiny"));
-
 app.use(express.static("./server/assets"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use("/", express.static(__dirname + "/"));
 
-//Endpoints
-app.get("/api/food", getFood);
+//Routes
+app.use(require("./routes/food/food"));
+
+app.use("/", express.static(__dirname + "/"));
 
 app.listen(PORT, () => console.info(`Listening on port ${PORT}`));
