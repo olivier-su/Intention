@@ -10,18 +10,19 @@ const options = {
 };
 
 const getFood = async (req, res) => {
-  //Getting today's date and formatting it using this as the date if user doesn't pass any in the body
-  const today = new Date();
-  const todayFormatted = `${today.getFullYear()}-${
-    today.getMonth() + 1
-  }-${today.getDate()}`;
-
   const bodyDate = req.body.date;
 
   try {
     if (bodyDate) {
       searchFoodByDate(res, bodyDate);
     } else {
+      //Getting today's date and formatting it using this as the date if user doesn't pass any in the body
+      const today = new Date();
+      const todayFormatted = today.toLocaleDateString(undefined, {
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit",
+      });
       searchFoodByDate(res, todayFormatted);
     }
   } catch (err) {
