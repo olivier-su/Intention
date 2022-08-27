@@ -1,5 +1,6 @@
 "use strict";
 const { MongoClient } = require("mongodb");
+const { todayDate } = require("../todayDateHelper");
 const { searchFoodByDate } = require("./foodHelpers");
 require("dotenv").config();
 
@@ -10,19 +11,14 @@ const options = {
 };
 
 const getFood = async (req, res) => {
-  const bodyDate = req.body.date;
+  const date = req.body.date;
 
   try {
-    if (bodyDate) {
-      searchFoodByDate(res, bodyDate);
+    if (date) {
+      searchFoodByDate(res, date);
     } else {
       //Getting today's date and formatting it using this as the date if user doesn't pass any in the body
-      const today = new Date();
-      const todayFormatted = today.toLocaleDateString(undefined, {
-        year: "numeric",
-        month: "2-digit",
-        day: "2-digit",
-      });
+      const todayFormatted = todayDate();
       searchFoodByDate(res, todayFormatted);
     }
   } catch (err) {
@@ -30,4 +26,57 @@ const getFood = async (req, res) => {
   }
 };
 
-module.exports = { getFood };
+const addFood = async (req, res) => {
+  let { name, calories, image, date } = req.body;
+
+  if (!name) {
+    res.status(400).json({ status: 400, message: "Missing name" });
+  }
+
+  if (!calories || calories < 0) {
+    res.status(400).json({ status: 400, message: "Missing calories" });
+  }
+
+  if (!date) {
+    date = todayDate();
+  }
+
+  const client = new MongoClient(MONGO_URI, options);
+  await client.connect();
+  try {
+    const db = client.db();
+
+    const food = await db.collection("food").findOne({ name });
+
+    if (food) {
+    }
+
+    //modify item stock
+    const modifyResult = await db
+      .collection("items")
+      .updateOne({ _id: itemId }, { $inc: { numInStock: -amount } });
+    if (!(modifyResult.matchedCount && modifyResult.modifiedCount)) {
+      return res.status(400).json({ status: 400, message: "Modify-Failure" });
+    }
+    //get cart item that has this itemId
+    //add or increase amount with upsert
+    const { _id, numInStock, ...restInfo } = item;
+    const modifyItemResult = await db
+      .collection("cart")
+      .updateOne(
+        { itemId },
+        { $inc: { amount }, $set: { itemId, ...restInfo } },
+        { upsert: true }
+      );
+    res.status(201).json({
+      status: 201,
+      data: req.body,
+      message: `${itemId} has been added`,
+    });
+  } catch (err) {
+    res.status(500).json({ status: 500, message: "Unknown-Error" });
+  }
+  client.close();
+};
+
+module.exports = { getFood, addFood };

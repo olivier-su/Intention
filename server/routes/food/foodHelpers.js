@@ -21,6 +21,7 @@ const searchFoodByDate = async (res, date) => {
       message: "Couldn't find any food logged that day.",
     });
   }
+  client.close();
 };
 
 module.exports = { searchFoodByDate };
