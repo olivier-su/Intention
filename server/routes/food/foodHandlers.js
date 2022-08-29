@@ -48,9 +48,11 @@ const addFood = async (req, res) => {
 
     const food = await db.collection("food").findOne({ name });
 
+    console.log(food);
+
     if (food) {
     }
-
+    /* 
     //modify item stock
     const modifyResult = await db
       .collection("items")
@@ -72,7 +74,7 @@ const addFood = async (req, res) => {
       status: 201,
       data: req.body,
       message: `${itemId} has been added`,
-    });
+    }); */
   } catch (err) {
     res.status(500).json({ status: 500, message: "Unknown-Error" });
   }
