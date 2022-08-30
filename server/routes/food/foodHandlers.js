@@ -12,15 +12,15 @@ const options = {
 };
 
 const getFood = async (req, res) => {
-  const date = req.body.date;
+  const { date, user } = req.body;
 
   try {
     if (date) {
-      searchFoodByDate(res, date);
+      searchFoodByDate(res, date, user);
     } else {
       //Getting today's date and formatting it using this as the date if user doesn't pass any in the body
       const todayFormatted = todayDate();
-      searchFoodByDate(res, todayFormatted);
+      searchFoodByDate(res, todayFormatted, user);
     }
   } catch (err) {
     console.log(err);
@@ -99,6 +99,29 @@ const updateFood = async (req, res) => {
   client.close();
 };
 
-const deleteFood = async (req, res) => {};
+const deleteFood = async (req, res) => {
+  let { _id, user } = req.body;
+
+  const client = new MongoClient(MONGO_URI, options);
+  await client.connect();
+  try {
+    const db = client.db();
+    const deleted = await db.collection("food").deleteOne({ _id, user });
+
+    if (deleted.deletedCount > 0) {
+      res.status(201).json({
+        status: 201,
+        message: `${_id} has been deleted`,
+      });
+    } else {
+      res
+        .status(400)
+        .json({ status: 400, message: "Nothing has been deleted" });
+    }
+  } catch (err) {
+    res.status(500).json({ status: 500, message: "Unknown-Error" });
+  }
+  client.close();
+};
 
 module.exports = { getFood, addFood, updateFood, deleteFood };

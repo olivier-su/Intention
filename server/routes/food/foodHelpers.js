@@ -8,11 +8,11 @@ const options = {
   useUnifiedTopology: true,
 };
 
-const searchFoodByDate = async (res, date) => {
+const searchFoodByDate = async (res, date, user) => {
   const client = new MongoClient(MONGO_URI, options);
   await client.connect();
   const db = client.db();
-  const result = await db.collection("food").find({ date: date }).toArray();
+  const result = await db.collection("food").find({ date, user }).toArray();
   if (result) {
     res.status(200).json({ status: 200, result });
   } else {
