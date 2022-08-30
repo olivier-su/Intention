@@ -12,7 +12,7 @@ const options = {
 };
 
 const getFood = async (req, res) => {
-  const { date, user } = req.body;
+  let { date, user } = req.body;
 
   try {
     if (date) {

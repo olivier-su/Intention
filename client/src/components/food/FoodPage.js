@@ -15,7 +15,14 @@ const FoodPage = () => {
   }, []);
 
   useEffect(() => {
-    fetch("/api/food")
+    //Change path when we have the user
+    fetch(`/api/dailyFood/?user=yo`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ user: "yo" }),
+    })
       .then((response) => response.json())
       .then((data) => {
         console.log(data.result);
