@@ -2,6 +2,7 @@
 const { MongoClient } = require("mongodb");
 const { todayDate } = require("../todayDateHelper");
 const { searchFoodByDate } = require("./foodHelpers");
+const { uuid } = require("uuidv4");
 require("dotenv").config();
 
 const { MONGO_URI } = process.env;
@@ -44,6 +45,7 @@ const addFood = async (req, res) => {
   const client = new MongoClient(MONGO_URI, options);
   await client.connect();
   try {
+    const _id = uuid();
     const db = client.db();
 
     //If the item exists, update calories only or else create it (upsert)
@@ -51,7 +53,7 @@ const addFood = async (req, res) => {
       .collection("food")
       .updateOne(
         { name, date, user },
-        { $inc: { calories: +calories }, $set: { name, date, user } },
+        { $inc: { calories: +calories }, $set: { _id, name, date, user } },
         { upsert: true }
       );
 
@@ -66,4 +68,37 @@ const addFood = async (req, res) => {
   client.close();
 };
 
-module.exports = { getFood, addFood };
+const updateFood = async (req, res) => {
+  let { _id, name, calories, date, user } = req.body;
+
+  const client = new MongoClient(MONGO_URI, options);
+  await client.connect();
+  try {
+    const db = client.db();
+    const food = await db
+      .collection("food")
+      .updateOne({ _id }, { $set: { name, date, user, calories } });
+
+    if (food.modifiedCount > 0) {
+      res.status(201).json({
+        status: 201,
+        message: `${_id} has been modified`,
+      });
+    } else if (food.modifiedCount === 0 && food.matchedCount > 0) {
+      res
+        .status(400)
+        .json({ status: 304, message: "Nothing has been modified" });
+    } else {
+      res
+        .status(400)
+        .json({ status: 400, message: "No items match your query" });
+    }
+  } catch (err) {
+    res.status(500).json({ status: 500, message: "Unknown-Error" });
+  }
+  client.close();
+};
+
+const deleteFood = async (req, res) => {};
+
+module.exports = { getFood, addFood, updateFood, deleteFood };
