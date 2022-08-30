@@ -27,7 +27,7 @@ const getFood = async (req, res) => {
 };
 
 const addFood = async (req, res) => {
-  let { name, calories, image, date } = req.body;
+  let { name, calories, date, user } = req.body;
 
   if (!name) {
     res.status(400).json({ status: 400, message: "Missing name" });
@@ -46,35 +46,20 @@ const addFood = async (req, res) => {
   try {
     const db = client.db();
 
-    const food = await db.collection("food").findOne({ name });
-
-    console.log(food);
-
-    if (food) {
-    }
-    /* 
-    //modify item stock
-    const modifyResult = await db
-      .collection("items")
-      .updateOne({ _id: itemId }, { $inc: { numInStock: -amount } });
-    if (!(modifyResult.matchedCount && modifyResult.modifiedCount)) {
-      return res.status(400).json({ status: 400, message: "Modify-Failure" });
-    }
-    //get cart item that has this itemId
-    //add or increase amount with upsert
-    const { _id, numInStock, ...restInfo } = item;
-    const modifyItemResult = await db
-      .collection("cart")
+    //If the item exists, update calories only or else create it (upsert)
+    await db
+      .collection("food")
       .updateOne(
-        { itemId },
-        { $inc: { amount }, $set: { itemId, ...restInfo } },
+        { name, date, user },
+        { $inc: { calories: +calories }, $set: { name, date, user } },
         { upsert: true }
       );
+
     res.status(201).json({
       status: 201,
       data: req.body,
-      message: `${itemId} has been added`,
-    }); */
+      message: `${name} has been added`,
+    });
   } catch (err) {
     res.status(500).json({ status: 500, message: "Unknown-Error" });
   }
