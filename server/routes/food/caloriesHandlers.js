@@ -10,9 +10,26 @@ const options = {
 
 const getCalories = async (req, res) => {
   let { date, user } = req.body;
-
+  const client = new MongoClient(MONGO_URI, options);
+  await client.connect();
   try {
+    const db = client.db();
+    const result = await db
+      .collection("calories")
+      .find({ date, user })
+      .toArray();
+    if (result) {
+      res.status(200).json({ status: 200, result });
+    } else {
+      res.status(400).json({
+        status: 400,
+        message: "Couldn't find any calories logged that day.",
+      });
+    }
   } catch (err) {
     console.log(err);
   }
+  client.close();
 };
+
+module.exports = { getCalories };
