@@ -45,41 +45,76 @@ const addFood = async (req, res) => {
   const client = new MongoClient(MONGO_URI, options);
   await client.connect();
   try {
-    const _id = uuid();
     const db = client.db();
 
-    //If the item exists, update calories only or else create it (upsert)
-    await db
+    const searchFood = await db
       .collection("food")
-      .updateOne(
-        { name, date, user },
-        { $inc: { calories: +calories }, $set: { _id, name, date, user } },
-        { upsert: true }
-      );
+      .find({ date, user, name })
+      .toArray();
 
-    res.status(201).json({
-      status: 201,
-      data: req.body,
-      message: `${name} has been added`,
-    });
+    //If the food is already in the database, update food collection and calories collection
+    if (searchFood.length > 0) {
+      await db
+        .collection("food")
+        .updateOne({ name, date, user }, { $inc: { calories: +calories } });
+      await db
+        .collection("calories")
+        .updateOne({ date, user }, { $inc: { calories: +calories } });
+      res.status(201).json({
+        status: 201,
+        data: req.body,
+        message: `${name} has been modified`,
+      });
+    }
+    // Else you add the food to the food collection and you create or increase the calories collection
+    else {
+      const _id = uuid();
+      await db
+        .collection("food")
+        .insertOne({ _id, date, name, user, calories });
+      await db
+        .collection("calories")
+        .updateOne(
+          { date, user },
+          { $inc: { calories: +calories }, $set: { date, user } },
+          { upsert: true }
+        );
+      res.status(201).json({
+        status: 201,
+        data: req.body,
+        message: `${name} has been added`,
+      });
+    }
   } catch (err) {
-    res.status(500).json({ status: 500, message: "Unknown-Error" });
+    res.status(500).json({ status: 500, message: err });
   }
   client.close();
 };
 
 const updateFood = async (req, res) => {
-  let { _id, name, calories, date, user } = req.body;
+  let { _id, name, calories, user, date } = req.body;
 
   const client = new MongoClient(MONGO_URI, options);
   await client.connect();
   try {
     const db = client.db();
+
+    //This part checks if the modification was adding or removing calories
+    const foodCopy = await db.collection("food").find({ _id }).toArray();
+    const oldCalories = foodCopy[0].calories;
+    const caloriesDifferential = calories - oldCalories;
+
     const food = await db
       .collection("food")
-      .updateOne({ _id }, { $set: { name, date, user, calories } });
+      .updateOne({ _id }, { $set: { name, calories } });
 
     if (food.modifiedCount > 0) {
+      await db
+        .collection("calories")
+        .updateOne(
+          { user, date },
+          { $inc: { calories: +caloriesDifferential } }
+        );
       res.status(201).json({
         status: 201,
         message: `${_id} has been modified`,
@@ -100,15 +135,20 @@ const updateFood = async (req, res) => {
 };
 
 const deleteFood = async (req, res) => {
-  let { _id, user } = req.body;
+  let { _id, user, date } = req.body;
 
   const client = new MongoClient(MONGO_URI, options);
   await client.connect();
   try {
     const db = client.db();
-    const deleted = await db.collection("food").deleteOne({ _id, user });
+    const food = await db.collection("food").find({ _id }).toArray();
+    const calories = food[0].calories;
+    const deleted = await db.collection("food").deleteOne({ _id });
 
     if (deleted.deletedCount > 0) {
+      await db
+        .collection("calories")
+        .updateOne({ user, date }, { $inc: { calories: -calories } });
       res.status(201).json({
         status: 201,
         message: `${_id} has been deleted`,
@@ -119,9 +159,8 @@ const deleteFood = async (req, res) => {
         .json({ status: 400, message: "Nothing has been deleted" });
     }
   } catch (err) {
-    res.status(500).json({ status: 500, message: "Unknown-Error" });
+    res.status(500).json({ status: 500, message: err });
   }
-  client.close();
 };
 
 module.exports = { getFood, addFood, updateFood, deleteFood };

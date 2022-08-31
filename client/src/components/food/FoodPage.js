@@ -1,11 +1,10 @@
 import { useEffect, useState } from "react";
-import FoodItem from "./FoodItem";
+import FoodJournal from "./foodJournal";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import styled from "styled-components";
 
 const FoodPage = () => {
-  const [food, setFood] = useState(null);
   const [foodSearch, setFoodSearch] = useState(null);
   const [date, setDate] = useState(new Date());
   const [formattedDate, setFormattedDate] = useState(
@@ -37,41 +36,23 @@ const FoodPage = () => {
       });
   }, []);
 
-  useEffect(() => {
-    //Change user when we have auth0 setup
-    fetch(`/api/dailyFood`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ user: "yo", date: formattedDate }),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data.result);
-        setFood(data.result);
-      });
-  }, [formattedDate]);
-
   return (
     <div>
       <CalendarContainer>
         <Calendar onChange={dateHandler} value={date} />
+        <p>Currently viewing: {formattedDate}</p>
       </CalendarContainer>
-
-      {food ? (
-        food.map((element) => {
-          return <FoodItem food={element} key={element._id} />;
-        })
-      ) : (
-        <p>Add food</p>
-      )}
+      <FoodJournal formattedDate={formattedDate} />
     </div>
   );
 };
 
 //Removing the yellow background on today's tile also adding the active to overwrite the color
 const CalendarContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
   .react-calendar__tile--now {
     background: white;
     color: black;
