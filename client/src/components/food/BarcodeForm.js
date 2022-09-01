@@ -19,8 +19,10 @@ const BarcodeForm = ({ setName, setCalories }) => {
           setName(data.products[0].product_name);
           if (data.products[0].nutriments["energy-kcal_100g"]) {
             setCalories(
-              (servingSize / 100) *
-                data.products[0].nutriments["energy-kcal_100g"]
+              Math.round(
+                (servingSize / 100) *
+                  data.products[0].nutriments["energy-kcal_100g"]
+              )
             );
           }
         }
