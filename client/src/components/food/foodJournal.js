@@ -5,6 +5,7 @@ import styled from "styled-components";
 
 const FoodJournal = ({ formattedDate }) => {
   const { submitFoodPressed } = useContext(AddFoodContext);
+  const [deleteFoodPressed, setDeleteFoodPressed] = useState(0);
   const [food, setFood] = useState([]);
   const [totalCalories, setTotalCalories] = useState(0);
 
@@ -24,7 +25,7 @@ const FoodJournal = ({ formattedDate }) => {
           setTotalCalories(0);
         }
       });
-  }, [formattedDate, submitFoodPressed]);
+  }, [formattedDate, submitFoodPressed, deleteFoodPressed]);
 
   useEffect(() => {
     //Change user when we have auth0 setup
@@ -37,9 +38,10 @@ const FoodJournal = ({ formattedDate }) => {
     })
       .then((response) => response.json())
       .then((data) => {
-        setFood(data.result);
+        //Reversing what we get in the db so that we have the most recent food at the top
+        setFood(data.result.reverse());
       });
-  }, [formattedDate, submitFoodPressed]);
+  }, [formattedDate, submitFoodPressed, deleteFoodPressed]);
 
   return (
     <JournalContainer>
@@ -48,7 +50,15 @@ const FoodJournal = ({ formattedDate }) => {
       {food.length > 0 ? (
         <>
           {food.map((element) => {
-            return <FoodItem food={element} key={element._id} />;
+            return (
+              <FoodItem
+                food={element}
+                key={element._id}
+                deleteFoodPressed={deleteFoodPressed}
+                setDeleteFoodPressed={setDeleteFoodPressed}
+                date={formattedDate}
+              />
+            );
           })}
         </>
       ) : (

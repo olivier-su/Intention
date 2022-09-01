@@ -8,9 +8,6 @@ const ManuallyAddFood = ({ date }) => {
   const [name, setName] = useState("");
   const [calories, setCalories] = useState("");
 
-  console.log(name);
-  console.log(calories);
-
   const handleSubmitFood = (e, name, calories) => {
     e.preventDefault();
     //The calories that we get from the input is a string so we typecast it to a number
