@@ -8,6 +8,9 @@ const ManuallyAddFood = ({ date }) => {
   const [name, setName] = useState("");
   const [calories, setCalories] = useState("");
 
+  console.log(name);
+  console.log(calories);
+
   const handleSubmitFood = (e, name, calories) => {
     e.preventDefault();
     //The calories that we get from the input is a string so we typecast it to a number
@@ -28,6 +31,8 @@ const ManuallyAddFood = ({ date }) => {
       .then((response) => response.json())
       .then((data) => {
         setSubmitFoodPressed(submitFoodPressed + 1);
+        setName("");
+        setCalories("");
       })
       .catch((err) => console.log(err));
   };
@@ -43,6 +48,7 @@ const ManuallyAddFood = ({ date }) => {
           onChange={(e) => {
             setName(e.target.value);
           }}
+          value={name}
           required={true}
         ></input>
         <label htmlFor="calories">Calories</label>
@@ -52,6 +58,7 @@ const ManuallyAddFood = ({ date }) => {
           onChange={(e) => {
             setCalories(e.target.value);
           }}
+          value={calories}
           required={true}
         ></input>
         <input type="submit" value="Add" />
