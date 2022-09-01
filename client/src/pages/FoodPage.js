@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
-import FoodJournal from "./foodJournal";
+import FoodJournal from "../components/food/FoodJournal";
+import ManuallyAddFood from "../components/food/ManuallyAddFood";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import styled from "styled-components";
+import { AddFoodProvider } from "../contexts/food/AddFoodContext";
 
 const FoodPage = () => {
   const [foodSearch, setFoodSearch] = useState(null);
@@ -37,13 +39,18 @@ const FoodPage = () => {
   }, []);
 
   return (
-    <div>
-      <CalendarContainer>
-        <Calendar onChange={dateHandler} value={date} />
-        <p>Currently viewing: {formattedDate}</p>
-      </CalendarContainer>
-      <FoodJournal formattedDate={formattedDate} />
-    </div>
+    <AddFoodProvider>
+      <FoodPageContainer>
+        <CalendarContainer>
+          <Calendar onChange={dateHandler} value={date} />
+          <p>Currently Viewing: {formattedDate}</p>
+        </CalendarContainer>
+        <DailyJournalContainer>
+          <FoodJournal formattedDate={formattedDate} />
+          <ManuallyAddFood date={formattedDate} />
+        </DailyJournalContainer>
+      </FoodPageContainer>
+    </AddFoodProvider>
   );
 };
 
@@ -61,6 +68,18 @@ const CalendarContainer = styled.div`
     background: #006edc;
     color: white;
   }
+`;
+
+const FoodPageContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+`;
+
+const DailyJournalContainer = styled.div`
+  display: flex;
+  gap: 50px;
 `;
 
 export default FoodPage;

@@ -2,10 +2,10 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import GlobalStyles from "../GlobalStyles";
 import Header from "./Header";
 import styled from "styled-components";
-import HomePage from "./homePage/HomePage";
-import FoodPage from "./food/FoodPage";
-import ExercisePage from "./exercise/ExercisePage";
-import SpendingPage from "./spending/SpendingPage";
+import HomePage from "../pages/HomePage";
+import FoodPage from "../pages/FoodPage";
+import ExercisePage from "../pages/ExercisePage";
+import SpendingPage from "../pages/SpendingPage";
 
 const App = () => {
   return (
