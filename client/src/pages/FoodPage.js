@@ -1,13 +1,12 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import FoodJournal from "../components/food/FoodJournal";
-import ManuallyAddFood from "../components/food/ManuallyAddFood";
+import AddFood from "../components/food/AddFood";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import styled from "styled-components";
 import { AddFoodProvider } from "../contexts/food/AddFoodContext";
 
 const FoodPage = () => {
-  const [foodSearch, setFoodSearch] = useState(null);
   const [date, setDate] = useState(new Date());
   const [formattedDate, setFormattedDate] = useState(
     new Date().toLocaleDateString(undefined, {
@@ -28,16 +27,6 @@ const FoodPage = () => {
     setDate(element);
   };
 
-  //Use https://openfoodfacts.github.io/api-documentation/ to get data on a product in this case it's muffinmax
-  useEffect(() => {
-    fetch("https://world.openfoodfacts.org/api/v2/search?code=064042553207")
-      .then((response) => response.json())
-      .then((data) => {
-        //console.log(data);
-        setFoodSearch(data);
-      });
-  }, []);
-
   return (
     <AddFoodProvider>
       <FoodPageContainer>
@@ -47,7 +36,7 @@ const FoodPage = () => {
         </CalendarContainer>
         <DailyJournalContainer>
           <FoodJournal formattedDate={formattedDate} />
-          <ManuallyAddFood date={formattedDate} />
+          <AddFood date={formattedDate} />
         </DailyJournalContainer>
       </FoodPageContainer>
     </AddFoodProvider>
