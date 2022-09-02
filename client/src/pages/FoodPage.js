@@ -5,6 +5,7 @@ import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import styled from "styled-components";
 import { AddFoodProvider } from "../contexts/food/AddFoodContext";
+import CaloriesChart from "../components/food/CaloriesChart";
 
 const FoodPage = () => {
   const [date, setDate] = useState(new Date());
@@ -30,14 +31,17 @@ const FoodPage = () => {
   return (
     <AddFoodProvider>
       <FoodPageContainer>
-        <CalendarContainer>
-          <Calendar onChange={dateHandler} value={date} />
-          <p>Currently Viewing: {formattedDate}</p>
-        </CalendarContainer>
-        <DailyJournalContainer>
-          <FoodJournal formattedDate={formattedDate} />
-          <AddFood date={formattedDate} />
-        </DailyJournalContainer>
+        <ContentContainer>
+          <CalendarContainer>
+            <Calendar onChange={dateHandler} value={date} />
+            <p>Currently Viewing: {formattedDate}</p>
+          </CalendarContainer>
+          <DailyJournalContainer>
+            <FoodJournal formattedDate={formattedDate} />
+            <AddFood date={formattedDate} />
+          </DailyJournalContainer>
+        </ContentContainer>
+        <CaloriesChart />
       </FoodPageContainer>
     </AddFoodProvider>
   );
@@ -59,9 +63,16 @@ const CalendarContainer = styled.div`
   }
 `;
 
-const FoodPageContainer = styled.div`
+const ContentContainer = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: center;
+  gap: 15px;
+`;
+
+const FoodPageContainer = styled.div`
+  display: flex;
+  justify-content: center;
   align-items: center;
   gap: 15px;
 `;

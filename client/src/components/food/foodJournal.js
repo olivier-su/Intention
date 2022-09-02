@@ -4,21 +4,22 @@ import FoodItem from "./FoodItem";
 import styled from "styled-components";
 import TotalCalories from "./TotalCalories";
 import { CircularProgress } from "@mui/material";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const FoodJournal = ({ formattedDate }) => {
   const { submitFoodPressed } = useContext(AddFoodContext);
   const [deleteFoodPressed, setDeleteFoodPressed] = useState(0);
   const [food, setFood] = useState(null);
+  const { user } = useAuth0();
 
   //Fetch food info
   useEffect(() => {
-    //Change user when we have auth0 setup
     fetch("/api/dailyFood", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ user: "yo", date: formattedDate }),
+      body: JSON.stringify({ user: `${user.email}`, date: formattedDate }),
     })
       .then((response) => response.json())
       .then((data) => {

@@ -1,7 +1,9 @@
 import { FiTrash2 } from "react-icons/fi";
 import styled from "styled-components";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const FoodItem = ({ food, deleteFoodPressed, setDeleteFoodPressed, date }) => {
+  const { user } = useAuth0();
   const handleDeleteFood = () => {
     fetch("/api/food", {
       method: "DELETE",
@@ -11,7 +13,7 @@ const FoodItem = ({ food, deleteFoodPressed, setDeleteFoodPressed, date }) => {
       body: JSON.stringify({
         _id: food._id,
         date,
-        user: "yo",
+        user: `${user.email}`,
       }),
     })
       .then((response) => response.json())

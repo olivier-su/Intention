@@ -2,8 +2,10 @@ import styled from "styled-components";
 import { useState, useContext } from "react";
 import { AddFoodContext } from "../../contexts/food/AddFoodContext";
 import BarcodeForm from "./BarcodeForm";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const AddFood = ({ date }) => {
+  const { user } = useAuth0();
   const { submitFoodPressed, setSubmitFoodPressed } =
     useContext(AddFoodContext);
   const [name, setName] = useState("");
@@ -23,7 +25,7 @@ const AddFood = ({ date }) => {
         name,
         calories,
         date,
-        user: "yo",
+        user: `${user.email}`,
       }),
     })
       .then((response) => response.json())
