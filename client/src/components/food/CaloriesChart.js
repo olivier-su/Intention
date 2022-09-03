@@ -85,7 +85,7 @@ const CaloriesChart = ({ submitFoodPressed, deleteFoodPressed }) => {
     plugins: {
       title: {
         display: true,
-        text: "Total Calories For The Current Week",
+        text: "Total Calories Consumed For The Current Week",
       },
     },
   };

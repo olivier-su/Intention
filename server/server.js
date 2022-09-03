@@ -27,7 +27,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(require("./routes/food/food"));
 app.use(require("./routes/exercise/exercise"));
 app.use(require("./routes/spending/spending"));
-app.use(require("./routes/toDoList/toDoList"));
+app.use(require("./routes/task/task"));
 
 app.use("/", express.static(__dirname + "/"));
 

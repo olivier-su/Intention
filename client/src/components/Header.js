@@ -15,6 +15,7 @@ const Header = () => {
       </WelcomeWrapper>
       <PageContainer>
         <NavLink to="/food">Food</NavLink>
+        <NavLink to="/task">Task</NavLink>
         <NavLink to="/exercise">Exercise</NavLink>
         <NavLink to="/spending">Spending</NavLink>
       </PageContainer>
