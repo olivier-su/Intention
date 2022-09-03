@@ -1,14 +1,16 @@
 import { useEffect, useState, useContext } from "react";
-import { AddFoodContext } from "../../contexts/food/AddFoodContext";
 import FoodItem from "./FoodItem";
 import styled from "styled-components";
 import TotalCalories from "./TotalCalories";
 import { CircularProgress } from "@mui/material";
 import { useAuth0 } from "@auth0/auth0-react";
 
-const FoodJournal = ({ formattedDate }) => {
-  const { submitFoodPressed } = useContext(AddFoodContext);
-  const [deleteFoodPressed, setDeleteFoodPressed] = useState(0);
+const FoodJournal = ({
+  formattedDate,
+  deleteFoodPressed,
+  setDeleteFoodPressed,
+  submitFoodPressed,
+}) => {
   const [food, setFood] = useState(null);
   const { user } = useAuth0();
 
@@ -26,7 +28,7 @@ const FoodJournal = ({ formattedDate }) => {
         //Reversing what we get in the db so that we have the most recent food at the top
         setFood(data.result.reverse());
       });
-  }, [formattedDate, submitFoodPressed, deleteFoodPressed]);
+  }, [formattedDate, submitFoodPressed, deleteFoodPressed, user.email]);
 
   return (
     <JournalContainer>
@@ -34,6 +36,7 @@ const FoodJournal = ({ formattedDate }) => {
       <TotalCalories
         formattedDate={formattedDate}
         deleteFoodPressed={deleteFoodPressed}
+        submitFoodPressed={submitFoodPressed}
       />
       {food !== null ? (
         food.length > 0 ? (

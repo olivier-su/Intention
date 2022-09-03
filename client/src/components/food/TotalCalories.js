@@ -1,11 +1,13 @@
 import { useState, useEffect, useContext } from "react";
-import { AddFoodContext } from "../../contexts/food/AddFoodContext";
 import { CircularProgress } from "@mui/material";
 import { useAuth0 } from "@auth0/auth0-react";
 
-const TotalCalories = ({ formattedDate, deleteFoodPressed }) => {
+const TotalCalories = ({
+  formattedDate,
+  deleteFoodPressed,
+  submitFoodPressed,
+}) => {
   const [totalCalories, setTotalCalories] = useState(null);
-  const { submitFoodPressed } = useContext(AddFoodContext);
   const { user } = useAuth0();
 
   //Fetch total calories
@@ -25,7 +27,7 @@ const TotalCalories = ({ formattedDate, deleteFoodPressed }) => {
           setTotalCalories(0);
         }
       });
-  }, [formattedDate, submitFoodPressed, deleteFoodPressed]);
+  }, [formattedDate, submitFoodPressed, deleteFoodPressed, user.email]);
 
   return (
     <>

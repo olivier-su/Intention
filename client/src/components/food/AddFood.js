@@ -1,13 +1,10 @@
 import styled from "styled-components";
-import { useState, useContext } from "react";
-import { AddFoodContext } from "../../contexts/food/AddFoodContext";
+import { useState } from "react";
 import BarcodeForm from "./BarcodeForm";
 import { useAuth0 } from "@auth0/auth0-react";
 
-const AddFood = ({ date }) => {
+const AddFood = ({ date, submitFoodPressed, setSubmitFoodPressed }) => {
   const { user } = useAuth0();
-  const { submitFoodPressed, setSubmitFoodPressed } =
-    useContext(AddFoodContext);
   const [name, setName] = useState("");
   const [calories, setCalories] = useState("");
 
