@@ -1,4 +1,4 @@
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useState } from "react";
 import FoodItem from "./FoodItem";
 import styled from "styled-components";
 import TotalCalories from "./TotalCalories";
