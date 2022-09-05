@@ -49,6 +49,7 @@ const AddFood = ({ date, submitFoodPressed, setSubmitFoodPressed }) => {
             }}
             value={name}
             required={true}
+            maxLength="50"
           />
         </div>
         <div className="caloriesContainer">
@@ -61,6 +62,7 @@ const AddFood = ({ date, submitFoodPressed, setSubmitFoodPressed }) => {
             }}
             value={calories}
             required={true}
+            max="9999"
           />
         </div>
 

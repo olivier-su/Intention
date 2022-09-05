@@ -26,7 +26,7 @@ const FoodItem = ({ food, deleteFoodPressed, setDeleteFoodPressed, date }) => {
   return (
     <FoodItemContainer>
       <FoodItemDetail>
-        <p>{food.name}</p>
+        <p className="food">{food.name}</p>
         <p>Calories: {food.calories}</p>
       </FoodItemDetail>
       <FiTrash2 className="trash" onClick={handleDeleteFood} />
@@ -41,6 +41,10 @@ const FoodItemContainer = styled.div`
   margin: 5px 0;
   padding: 5px;
 
+  .food {
+    max-width: 300px;
+    word-wrap: break-word;
+  }
   .trash {
     cursor: pointer;
   }
