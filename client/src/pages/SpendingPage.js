@@ -1,5 +1,5 @@
 const SpendingPage = () => {
-  return <div>Welcome to the spending page</div>;
+  return <div>Spending Page Coming Soon!</div>;
 };
 
 export default SpendingPage;

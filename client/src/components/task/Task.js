@@ -33,6 +33,7 @@ const TaskContainer = styled.div`
   margin: 5px 0;
   padding: 5px;
   gap: 15px;
+  max-width: 300px;
   .task {
     max-width: 300px;
     word-wrap: break-word;

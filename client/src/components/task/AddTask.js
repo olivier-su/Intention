@@ -47,5 +47,8 @@ const AddTask = ({ date, submitTaskPressed, setSubmitTaskPressed }) => {
   );
 };
 
-const FormWrapper = styled.form``;
+const FormWrapper = styled.form`
+  display: flex;
+  flex-direction: column;
+`;
 export default AddTask;

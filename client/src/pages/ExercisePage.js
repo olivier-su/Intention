@@ -1,5 +1,5 @@
 const ExercisePage = () => {
-  return <div>Welcome to the exercise page</div>;
+  return <div>Exercise Page Coming Soon!</div>;
 };
 
 export default ExercisePage;
