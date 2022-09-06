@@ -37,9 +37,11 @@ const FoodItem = ({ food, deleteFoodPressed, setDeleteFoodPressed, date }) => {
 const FoodItemContainer = styled.div`
   display: flex;
   justify-content: space-between;
-  border: 2px solid black;
   margin: 5px 0;
   padding: 5px;
+
+  box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px,
+    rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
 
   .food {
     max-width: 300px;

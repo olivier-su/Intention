@@ -14,9 +14,8 @@ import { useAuth0 } from "@auth0/auth0-react";
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip);
 
-const date = new Date();
-
 const CaloriesChart = ({ submitFoodPressed, deleteFoodPressed }) => {
+  const date = new Date();
   const { user } = useAuth0();
   const formatDay = (day) => {
     return format(day, "MM/dd/yyyy");
@@ -106,7 +105,7 @@ const CaloriesChart = ({ submitFoodPressed, deleteFoodPressed }) => {
     datasets: [
       {
         data: weeklyCalories.map((element) => element),
-        backgroundColor: "rgba(255, 99, 132, 0.5)",
+        backgroundColor: "#b7b7a4",
       },
     ],
   };

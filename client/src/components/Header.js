@@ -28,6 +28,38 @@ const Wrapper = styled.div`
   display: flex;
   justify-content: space-between;
   padding-left: 20px;
+
+  a {
+    background-image: linear-gradient(to right, #6b705c, #6b705c 50%, #000 50%);
+    background-size: 200% 100%;
+    background-position: -100%;
+    display: inline-block;
+    padding: 5px 0;
+    position: relative;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    transition: all 0.3s ease-in-out;
+  }
+
+  a:before {
+    content: "";
+    background: #6b705c;
+    display: block;
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    width: 0;
+    height: 3px;
+    transition: all 0.3s ease-in-out;
+  }
+
+  a:hover {
+    background-position: 0;
+  }
+
+  a:hover::before {
+    width: 100%;
+  }
 `;
 
 const WelcomeWrapper = styled.div`

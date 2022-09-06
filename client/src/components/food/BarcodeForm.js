@@ -60,7 +60,7 @@ const BarcodeForm = ({ setName, setCalories }) => {
         />
       </div>
 
-      <input type="submit" value="Search" />
+      <input className="searchButton" type="submit" value="Search" />
     </BarcodeFormWrapper>
   );
 };
@@ -69,6 +69,12 @@ const BarcodeFormWrapper = styled.form`
   display: flex;
   flex-direction: column;
   gap: 5px;
+
+  .searchButton {
+    background-color: #ffe8d6;
+    border-radius: 5%;
+    border-style: groove;
+  }
 
   .barcodeContainer {
     display: flex;

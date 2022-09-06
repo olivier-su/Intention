@@ -28,6 +28,7 @@ app.use(require("./routes/food/food"));
 app.use(require("./routes/exercise/exercise"));
 app.use(require("./routes/spending/spending"));
 app.use(require("./routes/task/task"));
+app.use(require("./routes/water/water"));
 
 app.use("/", express.static(__dirname + "/"));
 

@@ -66,7 +66,7 @@ const AddFood = ({ date, submitFoodPressed, setSubmitFoodPressed }) => {
           />
         </div>
 
-        <input type="submit" value="Add" />
+        <input className="addButton" type="submit" value="Add" />
       </ManualFormWrapper>
     </AddFoodContainer>
   );
@@ -91,6 +91,11 @@ const ManualFormWrapper = styled.form`
   .caloriesContainer {
     display: flex;
     justify-content: space-between;
+  }
+
+  .addButton {
+    background-color: #ffe8d6;
+    border-radius: 5%;
   }
 `;
 
