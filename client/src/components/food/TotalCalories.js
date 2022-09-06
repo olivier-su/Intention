@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect } from "react";
 import { CircularProgress } from "@mui/material";
 import { useAuth0 } from "@auth0/auth0-react";
 

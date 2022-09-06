@@ -40,6 +40,7 @@ const AddTask = ({ date, submitTaskPressed, setSubmitTaskPressed }) => {
           onChange={(e) => {
             setTask(e.target.value);
           }}
+          maxLength="50"
         />
         <input type="submit" value="Add" />
       </FormWrapper>

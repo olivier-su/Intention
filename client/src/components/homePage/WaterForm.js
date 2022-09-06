@@ -32,21 +32,32 @@ const WaterForm = ({ date, setWaterPressed, waterPressed }) => {
       <label htmlFor="waterForm">
         How much water did you drink today (mL)?
       </label>
-
-      <input
-        type="number"
-        id="waterForm"
-        onChange={(e) => {
-          setQuantity(e.target.value);
-        }}
-        value={quantity}
-        required={true}
-      />
-      <input className="addBtn" type="submit" value="Add" />
+      <div className="inputContainer">
+        <input
+          type="number"
+          id="waterForm"
+          onChange={(e) => {
+            setQuantity(e.target.value);
+          }}
+          value={quantity}
+          required={true}
+        />
+        <input className="addBtn" type="submit" value="Add" />
+      </div>
     </WaterFormContainer>
   );
 };
 
-const WaterFormContainer = styled.form``;
+const WaterFormContainer = styled.form`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+
+  .inputContainer {
+    display: flex;
+    gap: 3px;
+  }
+`;
 
 export default WaterForm;

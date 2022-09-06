@@ -35,7 +35,6 @@ const TaskContainer = styled.div`
   margin: 5px 0;
   padding: 5px;
   gap: 15px;
-  max-width: 300px;
 
   box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px,
     rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
