@@ -10,7 +10,7 @@ const Header = () => {
     <Wrapper>
       <WelcomeWrapper>
         <Link to="/">Intention</Link>
-        <p>Welcome {user.name}</p>
+        <p className="welcomeMessage">Welcome {user.name}</p>
         <LogoutButton />
       </WelcomeWrapper>
       <PageContainer>
@@ -36,6 +36,7 @@ const Wrapper = styled.div`
     display: inline-block;
     padding: 5px 0;
     position: relative;
+    background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     transition: all 0.3s ease-in-out;
@@ -65,6 +66,10 @@ const Wrapper = styled.div`
 const WelcomeWrapper = styled.div`
   display: flex;
   gap: 15px;
+
+  .welcomeMessage {
+    font-size: 1.3em;
+  }
 `;
 
 const PageContainer = styled.div`

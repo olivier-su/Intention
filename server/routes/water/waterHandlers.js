@@ -38,13 +38,15 @@ const updateWater = async (req, res) => {
   try {
     const db = client.db();
 
-    const searchFood = await db
+    const searchWater = await db
       .collection("water")
       .find({ date, user })
       .toArray();
 
-    if (searchFood.length > 0) {
-      await db.collection("water").updateOne({ date, user }, { quantity });
+    if (searchWater.length > 0) {
+      await db
+        .collection("water")
+        .updateOne({ date, user }, { $set: { quantity } });
       res.status(201).json({
         status: 201,
         data: req.body,

@@ -32,11 +32,13 @@ const Task = ({ task }) => {
 const TaskContainer = styled.div`
   display: flex;
   justify-content: space-between;
-  border: 2px solid black;
   margin: 5px 0;
   padding: 5px;
   gap: 15px;
   max-width: 300px;
+
+  box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px,
+    rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
   .task {
     max-width: 300px;
     word-wrap: break-word;
