@@ -1,17 +1,13 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { CircularProgress } from "@mui/material";
 import { useAuth0 } from "@auth0/auth0-react";
 import Task from "./Task";
+import { TaskContext } from "../../context/TaskContext";
 
-const ToDoList = ({
-  formattedDate,
-  deleteTaskPressed,
-  submitTaskPressed,
-  setDeleteTaskPressed,
-  homePage,
-}) => {
+const ToDoList = ({ formattedDate, submitTaskPressed, homePage }) => {
   const [task, setTask] = useState(null);
   const { user } = useAuth0();
+  const { deleteTaskPressed } = useContext(TaskContext);
 
   useEffect(() => {
     fetch("/api/get-task", {
@@ -35,18 +31,11 @@ const ToDoList = ({
         task.length > 0 ? (
           <>
             {task.map((element) => {
-              return (
-                <Task
-                  task={element}
-                  key={element._id}
-                  deleteTaskPressed={deleteTaskPressed}
-                  setDeleteTaskPressed={setDeleteTaskPressed}
-                />
-              );
+              return <Task task={element} key={element._id} />;
             })}
           </>
         ) : (
-          <p>Add tasks</p>
+          <p>You have no tasks</p>
         )
       ) : (
         <CircularProgress />

@@ -7,7 +7,6 @@ import AddTask from "../components/task/AddTask";
 
 const TaskPage = () => {
   const [submitTaskPressed, setSubmitTaskPressed] = useState(0);
-  const [deleteTaskPressed, setDeleteTaskPressed] = useState(0);
   const [date, setDate] = useState(new Date());
   const [formattedDate, setFormattedDate] = useState(
     new Date().toLocaleDateString(undefined, {
@@ -36,8 +35,6 @@ const TaskPage = () => {
       <ContentContainer>
         <ToDoList
           submitTaskPressed={submitTaskPressed}
-          deleteTaskPressed={deleteTaskPressed}
-          setDeleteTaskPressed={setDeleteTaskPressed}
           formattedDate={formattedDate}
         />
         <AddTask

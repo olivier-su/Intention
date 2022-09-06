@@ -1,5 +1,6 @@
 import CaloriesChart from "../components/food/CaloriesChart";
 import ToDoList from "../components/task/ToDoList";
+import Water from "../components/homePage/Water";
 
 const formattedDate = new Date().toLocaleDateString(undefined, {
   year: "numeric",
@@ -13,6 +14,7 @@ const HomePage = () => {
       <div>Welcome to the home page</div>
       <CaloriesChart />
       <ToDoList formattedDate={formattedDate} homePage={true} />
+      <Water />
     </>
   );
 };

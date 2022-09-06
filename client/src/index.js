@@ -3,6 +3,7 @@ import ReactDOM from "react-dom/client";
 import App from "./components/App";
 import { Auth0Provider } from "@auth0/auth0-react";
 import GlobalStyles from "./GlobalStyles";
+import { TaskProvider } from "./context/TaskContext";
 
 const domain = process.env.REACT_APP_AUTH0_DOMAIN;
 const clientId = process.env.REACT_APP_AUTH0_CLIENT_ID;
@@ -15,8 +16,10 @@ root.render(
       clientId={clientId}
       redirectUri="http://localhost:3000"
     >
-      <GlobalStyles />
-      <App />
+      <TaskProvider>
+        <GlobalStyles />
+        <App />
+      </TaskProvider>
     </Auth0Provider>
   </React.StrictMode>
 );

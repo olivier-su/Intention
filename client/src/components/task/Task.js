@@ -1,7 +1,10 @@
 import { FiTrash2 } from "react-icons/fi";
 import styled from "styled-components";
+import { useContext } from "react";
+import { TaskContext } from "../../context/TaskContext";
 
-const Task = ({ task, deleteTaskPressed, setDeleteTaskPressed }) => {
+const Task = ({ task }) => {
+  const { deleteTaskPressed, setDeleteTaskPressed } = useContext(TaskContext);
   const handleDeleteTask = () => {
     fetch("/api/task", {
       method: "DELETE",
