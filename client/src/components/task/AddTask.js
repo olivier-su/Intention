@@ -30,8 +30,8 @@ const AddTask = ({ date, submitTaskPressed, setSubmitTaskPressed }) => {
       .catch((err) => console.log(err));
   };
   return (
-    <div>
-      <p>Add Task</p>
+    <AddTaskContainer>
+      <p className="addTask">Add Task</p>
       <FormWrapper onSubmit={(e) => handleSubmitTask(e, task)}>
         <textarea
           value={task}
@@ -42,14 +42,33 @@ const AddTask = ({ date, submitTaskPressed, setSubmitTaskPressed }) => {
           }}
           maxLength="50"
         />
-        <input type="submit" value="Add" />
+        <input className="submitButton" type="submit" value="Add" />
       </FormWrapper>
-    </div>
+    </AddTaskContainer>
   );
 };
 
+const AddTaskContainer = styled.div`
+  .addTask {
+    text-align: center;
+    font-weight: bold;
+  }
+`;
+
 const FormWrapper = styled.form`
   display: flex;
+  margin-top: 5px;
   flex-direction: column;
+  gap: 5px;
+  textarea {
+    border-radius: 3%;
+    width: 300px;
+    height: 40px;
+  }
+  .submitButton {
+    background-color: #ffe8d6;
+    border-radius: 5%;
+    border-width: 1px;
+  }
 `;
 export default AddTask;

@@ -30,7 +30,7 @@ const TaskPage = () => {
     <TaskPageContainer>
       <CalendarContainer>
         <Calendar onChange={dateHandler} value={date} />
-        <p>Currently Viewing: {formattedDate}</p>
+        <p className="date">Currently Viewing: {formattedDate}</p>
       </CalendarContainer>
       <ContentContainer>
         <ToDoList
@@ -54,6 +54,9 @@ const CalendarContainer = styled.div`
   .react-calendar__tile--now {
     background: white;
     color: black;
+  }
+  .date {
+    font-weight: bold;
   }
   .react-calendar__tile--active {
     background: #006edc;

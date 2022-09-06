@@ -3,6 +3,7 @@ import { CircularProgress } from "@mui/material";
 import { useAuth0 } from "@auth0/auth0-react";
 import Task from "./Task";
 import { TaskContext } from "../../context/TaskContext";
+import styled from "styled-components";
 
 const ToDoList = ({ formattedDate, submitTaskPressed, homePage }) => {
   const [task, setTask] = useState(null);
@@ -24,8 +25,12 @@ const ToDoList = ({ formattedDate, submitTaskPressed, homePage }) => {
   }, [formattedDate, submitTaskPressed, deleteTaskPressed, user.email]);
 
   return (
-    <div>
-      {homePage ? <p>Tasks for today</p> : <p>Tasks for {formattedDate}</p>}
+    <ToDoListContainer>
+      {homePage ? (
+        <p className="date">Tasks for today</p>
+      ) : (
+        <p className="date">Tasks for {formattedDate}</p>
+      )}
 
       {task !== null ? (
         task.length > 0 ? (
@@ -35,13 +40,20 @@ const ToDoList = ({ formattedDate, submitTaskPressed, homePage }) => {
             })}
           </>
         ) : (
-          <p>You have no tasks</p>
+          <p className="date">You have no tasks</p>
         )
       ) : (
         <CircularProgress />
       )}
-    </div>
+    </ToDoListContainer>
   );
 };
+
+const ToDoListContainer = styled.div`
+  .date {
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+`;
 
 export default ToDoList;

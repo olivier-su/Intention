@@ -32,9 +32,11 @@ const Task = ({ task }) => {
 const TaskContainer = styled.div`
   display: flex;
   justify-content: space-between;
-  margin: 5px 0;
-  padding: 5px;
+  margin: 10px 0;
+  padding: 10px;
   gap: 15px;
+  border-radius: 8%;
+  background-color: #ddbea9;
 
   box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px,
     rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
