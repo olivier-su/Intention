@@ -1,5 +1,7 @@
 # Intention
 
+<img src="intentionReadme.png" alt="Intention Logo" width="200"/>
+
 Intention Is A Productivity Application Aimed At Providing Users Visual Tracking For Their Goals.
 
 Current Features:
