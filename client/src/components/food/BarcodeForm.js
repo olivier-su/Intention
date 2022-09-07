@@ -71,14 +71,15 @@ const BarcodeFormWrapper = styled.form`
   gap: 5px;
 
   .searchButton {
-    background-color: #ffe8d6;
+    background-color: white;
     border-radius: 5%;
-    border-style: groove;
+    border-width: 1px;
   }
 
   .barcodeContainer {
     display: flex;
     justify-content: space-between;
+    gap: 5px;
   }
   .servingSizeContainer {
     display: flex;

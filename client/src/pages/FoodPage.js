@@ -34,7 +34,9 @@ const FoodPage = () => {
       <ContentContainer>
         <CalendarContainer>
           <Calendar onChange={dateHandler} value={date} />
-          <p>Currently Viewing: {formattedDate}</p>
+          <p className="currentlyViewingMessage">
+            Currently Viewing: {formattedDate}
+          </p>
         </CalendarContainer>
         <DailyJournalContainer>
           <FoodJournal
@@ -64,6 +66,9 @@ const CalendarContainer = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 15px;
+  .currentlyViewingMessage {
+    font-weight: bold;
+  }
   .react-calendar__tile--now {
     background: white;
     color: black;

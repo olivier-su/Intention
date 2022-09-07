@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { CircularProgress } from "@mui/material";
 import { useAuth0 } from "@auth0/auth0-react";
+import styled from "styled-components";
 
 const TotalCalories = ({
   formattedDate,
@@ -32,12 +33,18 @@ const TotalCalories = ({
   return (
     <>
       {totalCalories !== null ? (
-        <p>Total Calories for the day: {totalCalories}</p>
+        <TotalCaloriesMessage>
+          Total Calories for the day: {totalCalories}
+        </TotalCaloriesMessage>
       ) : (
         <CircularProgress />
       )}
     </>
   );
 };
+
+const TotalCaloriesMessage = styled.p`
+  font-weight: bold;
+`;
 
 export default TotalCalories;

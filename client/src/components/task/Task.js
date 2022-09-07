@@ -36,7 +36,7 @@ const TaskContainer = styled.div`
   padding: 10px;
   gap: 15px;
   border-radius: 8%;
-  background-color: #ddbea9;
+  background-color: #b7b7a4;
 
   box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px,
     rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
@@ -46,6 +46,9 @@ const TaskContainer = styled.div`
   }
   .trash {
     cursor: pointer;
+    :hover {
+      color: red;
+    }
   }
 `;
 

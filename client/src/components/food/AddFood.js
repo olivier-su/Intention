@@ -36,7 +36,7 @@ const AddFood = ({ date, submitFoodPressed, setSubmitFoodPressed }) => {
 
   return (
     <AddFoodContainer>
-      <p>Add Food</p>
+      <p className="addFoodMessage">Add Food</p>
       <BarcodeForm setName={setName} setCalories={setCalories} />
       <ManualFormWrapper onSubmit={(e) => handleSubmitFood(e, name, calories)}>
         <div className="foodNameContainer">
@@ -76,6 +76,11 @@ const AddFoodContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 10px;
+  text-align: center;
+
+  .addFoodMessage {
+    font-weight: bold;
+  }
 `;
 
 const ManualFormWrapper = styled.form`
@@ -94,8 +99,9 @@ const ManualFormWrapper = styled.form`
   }
 
   .addButton {
-    background-color: #ffe8d6;
+    background-color: white;
     border-radius: 5%;
+    border-width: 1px;
   }
 `;
 

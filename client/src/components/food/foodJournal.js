@@ -32,7 +32,6 @@ const FoodJournal = ({
 
   return (
     <JournalContainer>
-      <p>Daily Journal</p>
       <TotalCalories
         formattedDate={formattedDate}
         deleteFoodPressed={deleteFoodPressed}
@@ -54,7 +53,7 @@ const FoodJournal = ({
             })}
           </>
         ) : (
-          <p>Add food</p>
+          <p className="addFoodMessage">Add food</p>
         )
       ) : (
         <CircularProgress />
@@ -63,6 +62,11 @@ const FoodJournal = ({
   );
 };
 
-const JournalContainer = styled.div``;
+const JournalContainer = styled.div`
+  .addFoodMessage {
+    margin-top: 10px;
+    font-weight: bold;
+  }
+`;
 
 export default FoodJournal;

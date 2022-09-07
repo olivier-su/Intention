@@ -66,7 +66,7 @@ const FormWrapper = styled.form`
     height: 40px;
   }
   .submitButton {
-    background-color: #ffe8d6;
+    background-color: white;
     border-radius: 5%;
     border-width: 1px;
   }

@@ -58,6 +58,12 @@ const WaterFormContainer = styled.form`
     display: flex;
     gap: 3px;
   }
+
+  .addBtn {
+    background-color: white;
+    border-radius: 10%;
+    border-width: 1px;
+  }
 `;
 
 export default WaterForm;

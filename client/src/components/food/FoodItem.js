@@ -37,9 +37,9 @@ const FoodItem = ({ food, deleteFoodPressed, setDeleteFoodPressed, date }) => {
 const FoodItemContainer = styled.div`
   display: flex;
   justify-content: space-between;
-  margin: 5px 0;
+  margin: 10px 0;
   padding: 5px;
-
+  border-radius: 8%;
   box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px,
     rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
 
@@ -49,8 +49,16 @@ const FoodItemContainer = styled.div`
   }
   .trash {
     cursor: pointer;
+
+    :hover {
+      color: red;
+    }
   }
 `;
-const FoodItemDetail = styled.div``;
+const FoodItemDetail = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+`;
 
 export default FoodItem;

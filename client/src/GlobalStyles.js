@@ -30,6 +30,7 @@ export default createGlobalStyle`
       font-size: 100%;
       vertical-align: baseline;
       font-family: var(--font-body);
+      color: #383E48
   }
   /* HTML5 display-role reset for older browsers */
   article, aside, details, figcaption, figure,
