@@ -23,7 +23,7 @@
 
 ---
 
-### Technologies Used
+### Technologies Used:
 
 - MongoDB
 - React.js
