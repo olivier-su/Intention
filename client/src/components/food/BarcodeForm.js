@@ -14,7 +14,6 @@ const BarcodeForm = ({ setName, setCalories }) => {
     fetch(`https://world.openfoodfacts.org/api/v2/search?code=${barcode}`)
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
         if (data.products.length > 0) {
           setName(data.products[0].product_name);
           if (data.products[0].nutriments["energy-kcal_100g"]) {

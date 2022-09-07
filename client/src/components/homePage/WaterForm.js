@@ -4,7 +4,6 @@ import { useAuth0 } from "@auth0/auth0-react";
 const WaterForm = ({ date, setWaterPressed, waterPressed }) => {
   const { user } = useAuth0();
   const [quantity, setQuantity] = useState(0);
-  console.log(quantity);
   const handleSubmitWater = (e, quantity) => {
     e.preventDefault();
     quantity = Number(quantity);
