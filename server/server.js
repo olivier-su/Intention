@@ -26,7 +26,7 @@ app.use(express.urlencoded({ extended: false }));
 //Routes
 app.use(require("./routes/food/food"));
 app.use(require("./routes/exercise/exercise"));
-app.use(require("./routes/spending/spending"));
+app.use(require("./routes/finance/finance"));
 app.use(require("./routes/task/task"));
 app.use(require("./routes/water/water"));
 

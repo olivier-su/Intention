@@ -4,7 +4,7 @@ import styled from "styled-components";
 import HomePage from "../pages/HomePage";
 import FoodPage from "../pages/FoodPage";
 import ExercisePage from "../pages/ExercisePage";
-import SpendingPage from "../pages/SpendingPage";
+import FinancePage from "../pages/FinancePage";
 import TaskPage from "../pages/TaskPage";
 import { useAuth0 } from "@auth0/auth0-react";
 import LoginScreen from "./authentication/LoginScreen";
@@ -27,7 +27,7 @@ const App = () => {
               <Route path="/food" element={<FoodPage />} />
               <Route path="/task" element={<TaskPage />} />
               <Route path="/exercise" element={<ExercisePage />} />
-              <Route path="/spending" element={<SpendingPage />} />
+              <Route path="/finance" element={<FinancePage />} />
             </Routes>
           </Main>
         </BrowserRouter>
