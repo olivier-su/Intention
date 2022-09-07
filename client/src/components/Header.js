@@ -28,6 +28,7 @@ const Wrapper = styled.div`
   display: flex;
   justify-content: space-between;
   padding-left: 20px;
+  margin-bottom: 50px;
 
   a {
     background-image: linear-gradient(to right, #6b705c, #6b705c 50%, #000 50%);
