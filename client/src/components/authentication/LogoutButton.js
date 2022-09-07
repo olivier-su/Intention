@@ -16,6 +16,7 @@ const LogoutBtn = styled.button`
   background-color: white;
   border-width: 1px;
   border-radius: 10%;
+  cursor: pointer;
 `;
 
 export default LogoutButton;

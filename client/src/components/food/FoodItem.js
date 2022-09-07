@@ -1,10 +1,14 @@
 import { FiTrash2 } from "react-icons/fi";
 import styled from "styled-components";
 import { useAuth0 } from "@auth0/auth0-react";
+import { CircularProgress } from "@mui/material";
+import { useState } from "react";
 
 const FoodItem = ({ food, deleteFoodPressed, setDeleteFoodPressed, date }) => {
   const { user } = useAuth0();
+  const [loading, setLoading] = useState(false);
   const handleDeleteFood = () => {
+    setLoading(true);
     fetch("/api/food", {
       method: "DELETE",
       headers: {
@@ -29,7 +33,11 @@ const FoodItem = ({ food, deleteFoodPressed, setDeleteFoodPressed, date }) => {
         <p className="food">{food.name}</p>
         <p>Calories: {food.calories}</p>
       </FoodItemDetail>
-      <FiTrash2 className="trash" onClick={handleDeleteFood} />
+      {loading ? (
+        <CircularProgress />
+      ) : (
+        <FiTrash2 className="trash" onClick={handleDeleteFood} />
+      )}
     </FoodItemContainer>
   );
 };

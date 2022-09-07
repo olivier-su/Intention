@@ -4,8 +4,10 @@ import { useAuth0 } from "@auth0/auth0-react";
 const WaterForm = ({ date, setWaterPressed, waterPressed }) => {
   const { user } = useAuth0();
   const [quantity, setQuantity] = useState(0);
+  const [loading, setLoading] = useState(false);
   const handleSubmitWater = (e, quantity) => {
     e.preventDefault();
+    setLoading(true);
     quantity = Number(quantity);
 
     fetch("/api/water", {
@@ -23,6 +25,7 @@ const WaterForm = ({ date, setWaterPressed, waterPressed }) => {
       .then((data) => {
         setWaterPressed(waterPressed + 1);
         setQuantity("");
+        setLoading(false);
       })
       .catch((err) => console.log(err));
   };
@@ -41,7 +44,11 @@ const WaterForm = ({ date, setWaterPressed, waterPressed }) => {
           value={quantity}
           required={true}
         />
-        <input className="addBtn" type="submit" value="Add" />
+        {loading ? (
+          <input className="addBtn" type="submit" value="Add" disabled={true} />
+        ) : (
+          <input className="addBtn" type="submit" value="Add" />
+        )}
       </div>
     </WaterFormContainer>
   );

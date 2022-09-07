@@ -4,6 +4,7 @@ import { useState } from "react";
 const BarcodeForm = ({ setName, setCalories }) => {
   const [barcode, setBarcode] = useState("");
   const [servingSize, setServingSize] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handleSubmitBarcode = (e, barcode, servingSize) => {
     e.preventDefault();
@@ -25,6 +26,7 @@ const BarcodeForm = ({ setName, setCalories }) => {
             );
           }
         }
+        setLoading(false);
         setBarcode("");
         setServingSize("");
       });
@@ -32,7 +34,10 @@ const BarcodeForm = ({ setName, setCalories }) => {
 
   return (
     <BarcodeFormWrapper
-      onSubmit={(e) => handleSubmitBarcode(e, barcode, servingSize)}
+      onSubmit={(e) => {
+        setLoading(true);
+        return handleSubmitBarcode(e, barcode, servingSize);
+      }}
     >
       <div className="barcodeContainer">
         <label htmlFor="barcode">Search By Barcode</label>
@@ -58,8 +63,16 @@ const BarcodeForm = ({ setName, setCalories }) => {
           value={servingSize}
         />
       </div>
-
-      <input className="searchButton" type="submit" value="Search" />
+      {loading ? (
+        <input
+          className="searchButton"
+          type="submit"
+          value="Search"
+          disabled={true}
+        />
+      ) : (
+        <input className="searchButton" type="submit" value="Search" />
+      )}
     </BarcodeFormWrapper>
   );
 };

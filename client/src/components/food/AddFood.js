@@ -7,9 +7,11 @@ const AddFood = ({ date, submitFoodPressed, setSubmitFoodPressed }) => {
   const { user } = useAuth0();
   const [name, setName] = useState("");
   const [calories, setCalories] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handleSubmitFood = (e, name, calories) => {
     e.preventDefault();
+    setLoading(true);
     //The calories that we get from the input is a string so we typecast it to a number
     calories = Number(calories);
 
@@ -30,6 +32,7 @@ const AddFood = ({ date, submitFoodPressed, setSubmitFoodPressed }) => {
         setSubmitFoodPressed(submitFoodPressed + 1);
         setName("");
         setCalories("");
+        setLoading(false);
       })
       .catch((err) => console.log(err));
   };
@@ -65,8 +68,16 @@ const AddFood = ({ date, submitFoodPressed, setSubmitFoodPressed }) => {
             max="9999"
           />
         </div>
-
-        <input className="addButton" type="submit" value="Add" />
+        {loading ? (
+          <input
+            className="addButton"
+            type="submit"
+            value="Add"
+            disabled={true}
+          />
+        ) : (
+          <input className="addButton" type="submit" value="Add" />
+        )}
       </ManualFormWrapper>
     </AddFoodContainer>
   );

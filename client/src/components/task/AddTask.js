@@ -5,8 +5,10 @@ import { useAuth0 } from "@auth0/auth0-react";
 const AddTask = ({ date, submitTaskPressed, setSubmitTaskPressed }) => {
   const { user } = useAuth0();
   const [task, setTask] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handleSubmitTask = (e, name, calories) => {
+    setLoading(true);
     e.preventDefault();
     //The calories that we get from the input is a string so we typecast it to a number
     calories = Number(calories);
@@ -26,6 +28,7 @@ const AddTask = ({ date, submitTaskPressed, setSubmitTaskPressed }) => {
       .then((data) => {
         setSubmitTaskPressed(submitTaskPressed + 1);
         setTask("");
+        setLoading(false);
       })
       .catch((err) => console.log(err));
   };
@@ -42,7 +45,16 @@ const AddTask = ({ date, submitTaskPressed, setSubmitTaskPressed }) => {
           }}
           maxLength="50"
         />
-        <input className="submitButton" type="submit" value="Add" />
+        {loading ? (
+          <input
+            className="submitButton"
+            type="submit"
+            value="Add"
+            disabled={true}
+          />
+        ) : (
+          <input className="submitButton" type="submit" value="Add" />
+        )}
       </FormWrapper>
     </AddTaskContainer>
   );
