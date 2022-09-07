@@ -1,7 +1,20 @@
 # Intention
 
-Productivity Application
+Intention is a productivity application aimed at providing users with visual tracking of their goals.
 
-### Built With
+Current features:
 
-- [![React][react.js]][react-url]
+- Food Tracking
+- To do list
+
+Upcoming features:
+
+- Exercise tracking
+- Finance tracking
+
+### Technologies used
+
+- MongoDB
+- React
+- Express
+- Node.js
