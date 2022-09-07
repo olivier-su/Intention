@@ -4,7 +4,7 @@
 
 ---
 
-## Intention Is A Productivity Application Aimed At Providing Users Visual Tracking For Their Goals.
+### Intention Is A Productivity Application Aimed At Providing Users Visual Tracking For Their Goals.
 
 ---
 
