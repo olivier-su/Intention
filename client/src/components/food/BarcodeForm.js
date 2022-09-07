@@ -74,6 +74,7 @@ const BarcodeFormWrapper = styled.form`
     background-color: white;
     border-radius: 5%;
     border-width: 1px;
+    cursor: pointer;
   }
 
   .barcodeContainer {

@@ -63,6 +63,7 @@ const WaterFormContainer = styled.form`
     background-color: white;
     border-radius: 10%;
     border-width: 1px;
+    cursor: pointer;
   }
 `;
 

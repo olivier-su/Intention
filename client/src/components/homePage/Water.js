@@ -66,14 +66,14 @@ const Water = () => {
     datasets: [
       {
         data: [water],
-        backgroundColor: "#bde0fe",
+        backgroundColor: "#a9d6e5",
       },
     ],
   };
   let fxProps = {
     count: 3,
     interval: 500,
-    colors: ["yellow", "blue", "gold"],
+    colors: ["gold"],
     bubbleSizeMinimum: 9,
     bubbleSizeMaximum: 9,
     calc: (props, i) => ({
