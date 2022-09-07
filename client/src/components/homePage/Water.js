@@ -91,9 +91,14 @@ const Water = () => {
         setWaterPressed={setWaterPressed}
       />
       {water >= 2000 && goalReached && <Fireworks {...fxProps} />}
-      {water >= 2000 && (
+      {water >= 2000 ? (
         <p className="waterGoalMessage">
           Congratulations! Daily Water Goal Reached!
+        </p>
+      ) : (
+        <p className="waterGoalMessage">
+          You still need to drink {2000 - water} mL of water to reach your daily
+          goal!
         </p>
       )}
     </WaterContainer>
