@@ -1,6 +1,6 @@
 # Intention
 
-Intention is a productivity application aimed at providing users with visual tracking of their goals.
+Intention is a productivity application aimed at providing users visual tracking for their goals.
 
 Current features:
 
