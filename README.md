@@ -1,19 +1,27 @@
 # Intention
 
-<img src="intentionReadme.png" alt="Intention Logo" width="200"/>
+![Alt text](/client/public/images/intentionReadMe.png?raw=true "Title")
 
-Intention Is A Productivity Application Aimed At Providing Users Visual Tracking For Their Goals.
+---
 
-Current Features:
+## Intention Is A Productivity Application Aimed At Providing Users Visual Tracking For Their Goals.
+
+---
+
+### Current Features:
 
 - Food Tracking
 - To Do List
 - Water Consumption
 
-Upcoming Features:
+---
+
+### Upcoming Features:
 
 - Exercise Tracking
 - Finance Tracking
+
+---
 
 ### Technologies Used
 
