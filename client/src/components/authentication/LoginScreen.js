@@ -12,22 +12,25 @@ const LoginScreen = () => {
         <div className="logInContainer">
           <p className="welcomeMessage">Set Your Intentions For The Day</p>
           <LoginButton />
+          <QuoteContainer>
+            <p>
+              ''Every action you take is a vote for the type of person you wish
+              to become.''
+            </p>
+            <p>- James Clear</p>
+            <p>Atomic Habits</p>
+          </QuoteContainer>
         </div>
       </LogInContainer>
-      <QuoteContainer>
-        <p>''Successful people are simply those with successful habits.''</p>
-        <p>- Brian Tracy</p>
-      </QuoteContainer>
     </>
   );
 };
 
 const QuoteContainer = styled.div`
-  position: absolute;
-  bottom: 30%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  text-align: center;
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 `;
 
 const LogInContainer = styled.div`
