@@ -29,6 +29,7 @@ const Wrapper = styled.div`
   justify-content: space-between;
   padding-left: 20px;
   margin-bottom: 50px;
+  font-size: 2em;
 
   a {
     background-image: linear-gradient(to right, #6b705c, #6b705c 50%, #000 50%);
